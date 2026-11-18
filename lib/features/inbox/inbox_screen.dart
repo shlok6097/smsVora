@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/ml/otp_detector.dart';
-import '../../core/ml/tinybert_service.dart';
 import '../../core/navigation/app_router.dart';
 import '../../core/services/app_settings.dart';
 import '../../core/theme/app_colors.dart';
@@ -535,7 +534,7 @@ class _InboxScreenState extends State<InboxScreen> {
                           : ListView.separated(
                               padding: const EdgeInsets.fromLTRB(16, 4, 16, 80),
                               itemCount: filtered.length,
-                              separatorBuilder: (_, __) => const SizedBox(height: 2),
+                              separatorBuilder: (context, index) => const SizedBox(height: 2),
                               itemBuilder: (context, index) {
                                 final conv = filtered[index];
                                 return _ConversationTile(
@@ -975,7 +974,7 @@ class _InboxScreenState extends State<InboxScreen> {
               : ListView.separated(
                   padding: const EdgeInsets.fromLTRB(16, 4, 16, 80),
                   itemCount: allEntries.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final item = allEntries[index];
                     final msg = item.message;
@@ -1967,7 +1966,6 @@ class _ConversationTile extends StatelessWidget {
         : '';
 
     final bool hasUnread = conversation.unread > 0;
-    final bool hasOtp = lastMessage?.otp != null;
     final String? copyableCode = _findCopyableValue(conversation);
     final Message? codeMessage = copyableCode != null
         ? _findMessageForValue(conversation, copyableCode)

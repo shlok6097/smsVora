@@ -1,5 +1,4 @@
 import '../../data/models/conversation.dart';
-import '../../data/models/message.dart';
 
 class AppSettings {
   AppSettings._();

@@ -424,7 +424,7 @@ class _ThreadScreenState extends State<ThreadScreen> {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   itemCount: _quickReplies.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 6),
+                  separatorBuilder: (context, index) => const SizedBox(width: 6),
                   itemBuilder: (context, index) {
                     final chipText = _quickReplies[index];
                     return InkWell(

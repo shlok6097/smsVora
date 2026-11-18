@@ -16,8 +16,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _smartOtpClean = AppSettings.instance.autoOrganizeOtps;
   bool _rcsFallback = AppSettings.instance.rcsFallback;
   bool _deleteExpiredOtps = AppSettings.instance.deleteExpiredOtps;
-  String _soundTone = AppSettings.instance.soundTone;
-  String _bubbleRadius = AppSettings.instance.bubbleRadius;
+  final String _soundTone = AppSettings.instance.soundTone;
+  final String _bubbleRadius = AppSettings.instance.bubbleRadius;
 
   @override
   Widget build(BuildContext context) {
