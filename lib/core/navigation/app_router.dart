@@ -11,6 +11,9 @@ import '../../features/thread/thread_screen.dart';
 class AppRouter {
   AppRouter._();
 
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+
   static const String inbox = '/inbox';
   static const String thread = '/thread';
   static const String compose = '/compose';

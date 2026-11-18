@@ -22,6 +22,24 @@ class CompanyExtractor {
   // Known Indian and global SMS sender prefix mappings
   static final Map<String, CompanyIdentity> _knownSenders = {
     // Banking & Finance (Parent Folder) -> Specific Bank Sub-folders
+    'NPCI': const CompanyIdentity(
+      companyName: 'NPCI UPI Services',
+      parentFolder: 'Banking & Finance',
+      subFolder: 'UPI & Payments',
+      category: ConversationCategory.banking,
+    ),
+    'BHIM': const CompanyIdentity(
+      companyName: 'BHIM UPI',
+      parentFolder: 'Banking & Finance',
+      subFolder: 'UPI & Payments',
+      category: ConversationCategory.banking,
+    ),
+    'UPI': const CompanyIdentity(
+      companyName: 'UPI Verification',
+      parentFolder: 'Banking & Finance',
+      subFolder: 'UPI & Payments',
+      category: ConversationCategory.banking,
+    ),
     'HDFCBK': const CompanyIdentity(
       companyName: 'HDFC Bank',
       parentFolder: 'Banking & Finance',

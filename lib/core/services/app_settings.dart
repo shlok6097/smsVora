@@ -12,6 +12,9 @@ class AppSettings {
   // Auto-delete expired OTPs after 24 hours (default: false / off)
   bool deleteExpiredOtps = false;
 
+  // Automated UPI registration / SIM device binding SMS (default: true / on)
+  bool allowAutomatedUpi = true;
+
   final String soundTone = 'Warm Woodblock';
   final String bubbleRadius = 'Rounded (20px)';
 

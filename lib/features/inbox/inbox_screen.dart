@@ -6,9 +6,9 @@ import '../../core/ml/otp_detector.dart';
 import '../../core/navigation/app_router.dart';
 import '../../core/services/app_settings.dart';
 import '../../core/theme/app_colors.dart';
+import '../../data/conversation_repository.dart';
 import '../../data/models/conversation.dart';
 import '../../data/models/message.dart';
-import '../../data/sample_data.dart';
 
 class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
@@ -59,7 +59,8 @@ class _InboxScreenState extends State<InboxScreen> {
   @override
   void initState() {
     super.initState();
-    _conversations = List.from(SampleData.conversations);
+    _conversations = List.from(ConversationRepository.instance.conversations);
+    ConversationRepository.instance.addListener(_onRepositoryUpdated);
     AppSettings.instance.cleanExpiredOtps(_conversations);
     _countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted) {
@@ -75,8 +76,17 @@ class _InboxScreenState extends State<InboxScreen> {
     });
   }
 
+  void _onRepositoryUpdated() {
+    if (mounted) {
+      setState(() {
+        _conversations = List.from(ConversationRepository.instance.conversations);
+      });
+    }
+  }
+
   @override
   void dispose() {
+    ConversationRepository.instance.removeListener(_onRepositoryUpdated);
     _countdownTimer?.cancel();
     _searchController.dispose();
     super.dispose();

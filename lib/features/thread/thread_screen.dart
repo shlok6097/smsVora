@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import '../../core/ml/tinybert_service.dart';
 import '../../core/navigation/app_router.dart';
 import '../../core/theme/app_colors.dart';
+import '../../data/conversation_repository.dart';
 import '../../data/models/conversation.dart';
 import '../../data/models/message.dart';
 
@@ -38,11 +39,13 @@ class _ThreadScreenState extends State<ThreadScreen> {
     super.initState();
     _conversation = widget.conversation;
     _messages = List.from(widget.conversation.messages);
+    ConversationRepository.instance.addListener(_onRepoChanged);
     _otpTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted) setState(() {});
     });
     // Mark messages as read
     if (_conversation.unread > 0) {
+      ConversationRepository.instance.markAsRead(_conversation.id);
       _conversation = Conversation(
         id: _conversation.id,
         name: _conversation.name,
@@ -61,8 +64,21 @@ class _ThreadScreenState extends State<ThreadScreen> {
     }
   }
 
+  void _onRepoChanged() {
+    if (!mounted) return;
+    final updated = ConversationRepository.instance.getConversation(_conversation.id);
+    if (updated != null) {
+      setState(() {
+        _conversation = updated;
+        _messages = List.from(updated.messages);
+      });
+      _scrollToBottom();
+    }
+  }
+
   @override
   void dispose() {
+    ConversationRepository.instance.removeListener(_onRepoChanged);
     _otpTimer?.cancel();
     _replyController.dispose();
     _scrollController.dispose();

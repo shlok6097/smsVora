@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 import '../../data/models/conversation.dart';
+import '../services/telephony_service.dart';
 import 'bert_tokenizer.dart';
 import 'company_extractor.dart';
 import 'otp_detector.dart';
@@ -110,6 +111,24 @@ class TinyBertService {
 
     final cleanText = messageText.trim();
 
+    // Whitelist and classify automated UPI device binding & registration messages
+    if (TelephonyService.instance.allowAutomatedUpi &&
+        TelephonyService.instance.isUpiVerificationMessage(cleanText, recipient: senderHeader)) {
+      return const TinyBertClassificationResult(
+        category: ConversationCategory.banking,
+        confidence: 0.99,
+        company: CompanyIdentity(
+          companyName: 'UPI Device Registration',
+          parentFolder: 'Banking & Finance',
+          subFolder: 'UPI & Payments',
+          category: ConversationCategory.banking,
+        ),
+        isScamSuspicious: false,
+        explanation: 'Automated UPI SIM device binding verification whitelisted for banking.',
+        executedOnTflite: false,
+      );
+    }
+
     // Contextual extraction
     final company = CompanyExtractor.extract(senderHeader ?? '', cleanText);
     final otpResult = OtpDetector.detect(cleanText, receivedAt: receivedAt);
@@ -185,6 +204,25 @@ class TinyBertService {
     DateTime? receivedAt,
   }) {
     final cleanText = messageText.trim();
+
+    // Whitelist and classify automated UPI device binding & registration messages
+    if (TelephonyService.instance.allowAutomatedUpi &&
+        TelephonyService.instance.isUpiVerificationMessage(cleanText, recipient: senderHeader)) {
+      return const TinyBertClassificationResult(
+        category: ConversationCategory.banking,
+        confidence: 0.99,
+        company: CompanyIdentity(
+          companyName: 'UPI Device Registration',
+          parentFolder: 'Banking & Finance',
+          subFolder: 'UPI & Payments',
+          category: ConversationCategory.banking,
+        ),
+        isScamSuspicious: false,
+        explanation: 'Automated UPI SIM device binding verification whitelisted for banking.',
+        executedOnTflite: false,
+      );
+    }
+
     final lower = cleanText.toLowerCase();
 
     final company = CompanyExtractor.extract(senderHeader ?? '', cleanText);

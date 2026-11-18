@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/services/app_settings.dart';
+import '../../core/services/telephony_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/sample_data.dart';
 
@@ -16,8 +17,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _smartOtpClean = AppSettings.instance.autoOrganizeOtps;
   bool _rcsFallback = AppSettings.instance.rcsFallback;
   bool _deleteExpiredOtps = AppSettings.instance.deleteExpiredOtps;
+  bool _allowAutomatedUpi = AppSettings.instance.allowAutomatedUpi;
+  bool _isDefaultSms = true;
   final String _soundTone = AppSettings.instance.soundTone;
   final String _bubbleRadius = AppSettings.instance.bubbleRadius;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkDefaultSms();
+  }
+
+  void _checkDefaultSms() async {
+    final isDefault = await TelephonyService.instance.isDefaultSmsApp();
+    if (mounted) {
+      setState(() => _isDefaultSms = isDefault);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,6 +228,129 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             }
                           },
                         ),
+                        const Divider(
+                          height: 1,
+                          thickness: 1,
+                          color: AppColors.greigeStone,
+                        ),
+                        _ToggleRow(
+                          title: 'Automated UPI Verification SMS',
+                          description:
+                              'Allow Google Pay, PhonePe, and BHIM device binding SMS to be sent seamlessly',
+                          value: _allowAutomatedUpi,
+                          onChanged: (val) {
+                            setState(() {
+                              _allowAutomatedUpi = val;
+                              AppSettings.instance.allowAutomatedUpi = val;
+                              TelephonyService.instance.allowAutomatedUpi = val;
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(val
+                                    ? 'Automated UPI registration SMS enabled.'
+                                    : 'Automated UPI registration SMS paused.'),
+                                backgroundColor: AppColors.deepForest,
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Default SMS App Card
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppColors.extraLight,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: AppColors.greigeStone,
+                        width: 1,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Default SMS Application',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.deepForest,
+                                  ),
+                                ),
+                                SizedBox(height: 2),
+                                Text(
+                                  'Required for UPI apps to send device verification SMS',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: AppColors.chestnut,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: _isDefaultSms
+                                    ? AppColors.warmTaupe
+                                    : AppColors.greigeStone,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                _isDefaultSms ? 'Active' : 'Not Set',
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.deepForest,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (!_isDefaultSms) ...[
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                final requested = await TelephonyService.instance
+                                    .requestDefaultSmsApp();
+                                if (requested) {
+                                  _checkDefaultSms();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.deepForest,
+                                foregroundColor: AppColors.softCream,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                              ),
+                              child: const Text(
+                                'Set smsVora as Default SMS App',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),
