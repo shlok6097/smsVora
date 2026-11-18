@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/ml/tinybert_service.dart';
 import '../../core/navigation/app_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/models/conversation.dart';
@@ -61,6 +62,11 @@ class _ComposeScreenState extends State<ComposeScreen> {
       }
     }
 
+    final bertResult = TinyBertService.instance.classify(
+      messageText: text,
+      senderHeader: to,
+    );
+
     final newMsg = Message(
       id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
       sender: MessageSender.me,
@@ -68,6 +74,10 @@ class _ComposeScreenState extends State<ComposeScreen> {
       time: 'Just now',
       date: 'Today',
       status: MessageStatus.delivered,
+      otp: bertResult.otpResult?.code,
+      otpExpiryDuration: bertResult.otpResult?.expiryDuration,
+      otpExpiresAt: bertResult.otpResult?.expiresAt,
+      category: bertResult.category,
     );
 
     final Conversation targetConv;
@@ -86,6 +96,8 @@ class _ComposeScreenState extends State<ComposeScreen> {
         muted: existing.muted,
         lastTime: 'Just now',
         carrier: 'SMS · $_selectedSim',
+        companyName: existing.companyName,
+        companyFolder: existing.companyFolder,
         messages: updatedMessages,
       );
     } else {
@@ -94,6 +106,9 @@ class _ComposeScreenState extends State<ComposeScreen> {
           ? '${words[0][0]}${words[1][0]}'.toUpperCase()
           : (to.length >= 2 ? to.substring(0, 2).toUpperCase() : 'SM');
 
+      final companyName = bertResult.company?.companyName ?? '';
+      final companyFolder = bertResult.company?.folderName ?? '';
+
       targetConv = Conversation(
         id: 'conv_${DateTime.now().millisecondsSinceEpoch}',
         name: to,
@@ -101,12 +116,14 @@ class _ComposeScreenState extends State<ComposeScreen> {
         initials: initials,
         avatarBgColor: AppColors.chestnut,
         avatarTextColor: AppColors.softCream,
-        category: ConversationCategory.personal,
+        category: bertResult.category,
         pinned: false,
         unread: 0,
         muted: false,
         lastTime: 'Just now',
         carrier: 'SMS · $_selectedSim',
+        companyName: companyName,
+        companyFolder: companyFolder,
         messages: [newMsg],
       );
     }

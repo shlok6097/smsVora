@@ -26,21 +26,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
   void _togglePin() {
     setState(() {
-      _conversation = Conversation(
-        id: _conversation.id,
-        name: _conversation.name,
-        phone: _conversation.phone,
-        initials: _conversation.initials,
-        avatarBgColor: _conversation.avatarBgColor,
-        avatarTextColor: _conversation.avatarTextColor,
-        category: _conversation.category,
-        pinned: !_conversation.pinned,
-        unread: _conversation.unread,
-        muted: _conversation.muted,
-        lastTime: _conversation.lastTime,
-        carrier: _conversation.carrier,
-        messages: _conversation.messages,
-      );
+      _conversation = _conversation.copyWith(pinned: !_conversation.pinned);
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -58,21 +44,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
   void _toggleMute() {
     setState(() {
-      _conversation = Conversation(
-        id: _conversation.id,
-        name: _conversation.name,
-        phone: _conversation.phone,
-        initials: _conversation.initials,
-        avatarBgColor: _conversation.avatarBgColor,
-        avatarTextColor: _conversation.avatarTextColor,
-        category: _conversation.category,
-        pinned: _conversation.pinned,
-        unread: _conversation.unread,
-        muted: !_conversation.muted,
-        lastTime: _conversation.lastTime,
-        carrier: _conversation.carrier,
-        messages: _conversation.messages,
-      );
+      _conversation = _conversation.copyWith(muted: !_conversation.muted);
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -176,6 +148,27 @@ class _ContactScreenState extends State<ContactScreen> {
                               color: AppColors.chestnut,
                             ),
                           ),
+                          if (_conversation.companyName.isNotEmpty) ...[
+                            const SizedBox(height: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.greigeStone,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                '${_conversation.companyName} · ${_conversation.companyFolder}',
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.deepForest,
+                                ),
+                              ),
+                            ),
+                          ],
                         ],
                       ),
                     ),

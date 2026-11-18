@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../core/services/app_settings.dart';
 import '../../core/theme/app_colors.dart';
+import '../../data/sample_data.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -10,11 +12,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _deliveryReports = true;
-  bool _smartOtpClean = true;
-  bool _rcsFallback = true;
-  String _soundTone = 'Warm Woodblock';
-  String _bubbleRadius = 'Rounded (20px)';
+  bool _deliveryReports = AppSettings.instance.deliveryReports;
+  bool _smartOtpClean = AppSettings.instance.autoOrganizeOtps;
+  bool _rcsFallback = AppSettings.instance.rcsFallback;
+  bool _deleteExpiredOtps = AppSettings.instance.deleteExpiredOtps;
+  String _soundTone = AppSettings.instance.soundTone;
+  String _bubbleRadius = AppSettings.instance.bubbleRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -176,6 +179,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           value: _rcsFallback,
                           onChanged: (val) {
                             setState(() => _rcsFallback = val);
+                            AppSettings.instance.rcsFallback = val;
+                          },
+                        ),
+                        const Divider(
+                          height: 1,
+                          thickness: 1,
+                          color: AppColors.greigeStone,
+                        ),
+                        _ToggleRow(
+                          title: 'Delete Expired OTPs',
+                          description:
+                              'Automatically delete expired OTP messages after 24 hours',
+                          value: _deleteExpiredOtps,
+                          onChanged: (val) {
+                            setState(() {
+                              _deleteExpiredOtps = val;
+                              AppSettings.instance.deleteExpiredOtps = val;
+                            });
+                            if (val) {
+                              final count = AppSettings.instance
+                                  .cleanExpiredOtps(SampleData.conversations);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(count > 0
+                                      ? 'Auto-cleanup enabled: $count expired OTP(s) deleted.'
+                                      : 'Auto-cleanup enabled. OTPs will be deleted 24h after expiry.'),
+                                  backgroundColor: AppColors.deepForest,
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            }
                           },
                         ),
                       ],

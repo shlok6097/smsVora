@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../core/ml/tinybert_service.dart';
 import '../../core/navigation/app_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/models/conversation.dart';
@@ -23,6 +25,7 @@ class _ThreadScreenState extends State<ThreadScreen> {
   late List<Message> _messages;
   final TextEditingController _replyController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  Timer? _otpTimer;
 
   final List<String> _quickReplies = [
     'On my way!',
@@ -35,6 +38,9 @@ class _ThreadScreenState extends State<ThreadScreen> {
     super.initState();
     _conversation = widget.conversation;
     _messages = List.from(widget.conversation.messages);
+    _otpTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (mounted) setState(() {});
+    });
     // Mark messages as read
     if (_conversation.unread > 0) {
       _conversation = Conversation(
@@ -57,6 +63,7 @@ class _ThreadScreenState extends State<ThreadScreen> {
 
   @override
   void dispose() {
+    _otpTimer?.cancel();
     _replyController.dispose();
     _scrollController.dispose();
     super.dispose();
@@ -78,6 +85,11 @@ class _ThreadScreenState extends State<ThreadScreen> {
     final text = (textOverride ?? _replyController.text).trim();
     if (text.isEmpty) return;
 
+    final bertResult = TinyBertService.instance.classify(
+      messageText: text,
+      senderHeader: _conversation.phone,
+    );
+
     final newMessage = Message(
       id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
       sender: MessageSender.me,
@@ -85,6 +97,10 @@ class _ThreadScreenState extends State<ThreadScreen> {
       time: 'Just now',
       date: 'Today',
       status: MessageStatus.delivered,
+      otp: bertResult.otpResult?.code,
+      otpExpiryDuration: bertResult.otpResult?.expiryDuration,
+      otpExpiresAt: bertResult.otpResult?.expiresAt,
+      category: bertResult.category,
     );
 
     setState(() {
@@ -102,6 +118,8 @@ class _ThreadScreenState extends State<ThreadScreen> {
         muted: _conversation.muted,
         lastTime: 'Just now',
         carrier: _conversation.carrier,
+        companyName: _conversation.companyName,
+        companyFolder: _conversation.companyFolder,
         messages: _messages,
       );
       if (textOverride == null) {
@@ -321,14 +339,43 @@ class _ThreadScreenState extends State<ThreadScreen> {
                                   ),
                                   if (m.otp != null) ...[
                                     const SizedBox(height: 8),
+                                    if (m.formattedExpiryRemaining != null)
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 6),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.timer_outlined,
+                                              size: 13,
+                                              color: m.isOtpExpired
+                                                  ? Colors.red[800]
+                                                  : (isMe ? AppColors.softCream : AppColors.deepForest),
+                                            ),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              m.formattedExpiryRemaining!,
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w700,
+                                                color: m.isOtpExpired
+                                                  ? Colors.red[800]
+                                                  : (isMe ? AppColors.softCream : AppColors.deepForest),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     InkWell(
                                       onTap: () => _copyOtp(m.otp!),
                                       borderRadius: BorderRadius.circular(10),
                                       child: Container(
                                         width: double.infinity,
-                                        padding: const EdgeInsets.symmetric(vertical: 6),
+                                        padding: const EdgeInsets.symmetric(vertical: 7),
                                         decoration: BoxDecoration(
-                                          color: AppColors.deepEspresso,
+                                          color: m.isOtpExpired
+                                              ? AppColors.warmTaupe
+                                              : AppColors.deepEspresso,
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                         alignment: Alignment.center,
