@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warm Earth SMS — Complete App Screens</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --espresso: #291C0E;
+      --chestnut: #6E473B;
+      --taupe: #A78D78;
+      --stone: #BEB5A9;
+      --cream: #E1D4C2;
+      --cream-light: #EFE6D8;
+      --cream-soft: #E8DDD0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(155deg, #D5C8B8 0%, #BEB5A9 45%, #A78D78 100%);
+      color: var(--espresso);
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Custom subtle scrollbars */
+    .phone-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .phone-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .phone-scroll::-webkit-scrollbar-thumb {
+      background: rgba(167, 141, 120, 0.45);
+      border-radius: 9999px;
+    }
+
+    .phone-frame {
+      width: 100%;
+      max-width: 390px;
+      height: 780px;
+      background-color: var(--cream);
+      border-radius: 44px;
+      border: 8px solid var(--espresso);
+      box-shadow:
+        0 28px 60px -15px rgba(41, 28, 14, 0.42),
+        0 0 0 1px rgba(225, 212, 194, 0.25) inset;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .phone-frame-mini {
+      width: 330px;
+      height: 670px;
+      background-color: var(--cream);
+      border-radius: 38px;
+      border: 7px solid var(--espresso);
+      box-shadow: 0 22px 45px -12px rgba(41, 28, 14, 0.35);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .dynamic-island {
+      width: 104px;
+      height: 26px;
+      background-color: var(--espresso);
+      border-radius: 9999px;
+      margin: 8px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+
+    .bubble-sent {
+      background-color: var(--chestnut);
+      color: var(--cream);
+      border-radius: 20px 20px 6px 20px;
+    }
+
+    .bubble-received {
+      background-color: var(--stone);
+      color: var(--espresso);
+      border-radius: 20px 20px 20px 6px;
+    }
+
+    .toast-enter {
+      animation: toastSlide 0.25s ease-out;
+    }
+
+    @keyframes toastSlide {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#6E473B] selection:text-[#E1D4C2]">
+
+  <!-- Top Showcase Header -->
+  <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-3">
+    <div class="rounded-2xl px-4 py-3.5 sm:px-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 shadow-lg"
+         style="background-color: rgba(41, 28, 14, 0.92); color: #E1D4C2;">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+        <div>
+          <h1 class="text-base sm:text-lg font-semibold tracking-tight flex items-center gap-2">
+            <span class="inline-flex w-7 h-7 rounded-lg items-center justify-center" style="background-color: #6E473B; color: #E1D4C2;">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </span>
+            Earthy Minimalist SMS App
+          </h1>
+          <p class="text-xs mt-0.5" style="color: #BEB5A9;">
+            5 complete mobile screens styled strictly with your 5-tone palette
+          </p>
+        </div>
+
+        <!-- Color Palette Swatches -->
+        <div class="flex flex-wrap items-center gap-1.5" id="paletteBar">
+          <button type="button" data-hex="#291C0E" data-role="Deep Espresso · Headers & Primary Ink"
+                  class="swatch-btn group flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium border border-[#6E473B]/60 hover:scale-105 transition"
+                  style="background-color: #291C0E; color: #E1D4C2;">
+            <span class="w-2.5 h-2.5 rounded-full border border-[#E1D4C2]/40" style="background-color: #291C0E;"></span>
+            #291C0E
+          </button>
+          <button type="button" data-hex="#6E473B" data-role="Chestnut · Sent Bubbles & Primary Accents"
+                  class="swatch-btn flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium hover:scale-105 transition"
+                  style="background-color: #6E473B; color: #E1D4C2;">
+            #6E473B
+          </button>
+          <button type="button" data-hex="#A78D78" data-role="Warm Taupe · Secondary Text & Icons"
+                  class="swatch-btn flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium hover:scale-105 transition"
+                  style="background-color: #A78D78; color: #291C0E;">
+            #A78D78
+          </button>
+          <button type="button" data-hex="#BEB5A9" data-role="Greige Stone · Received Bubbles & Cards"
+                  class="swatch-btn flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium hover:scale-105 transition"
+                  style="background-color: #BEB5A9; color: #291C0E;">
+            #BEB5A9
+          </button>
+          <button type="button" data-hex="#E1D4C2" data-role="Soft Cream · Canvas & Light Surfaces"
+                  class="swatch-btn flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium hover:scale-105 transition"
+                  style="background-color: #E1D4C2; color: #291C0E;">
+            #E1D4C2
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode Switcher -->
+      <div class="flex items-center gap-2 self-start lg:self-auto">
+        <div class="inline-flex p-1 rounded-xl" style="background-color: #3A2917;">
+          <button type="button" id="modeInteractiveBtn"
+                  class="px-3 py-1.5 rounded-lg text-xs font-semibold transition"
+                  style="background-color: #E1D4C2; color: #291C0E;">
+            Interactive Prototype
+          </button>
+          <button type="button" id="modeGalleryBtn"
+                  class="px-3 py-1.5 rounded-lg text-xs font-semibold transition"
+                  style="color: #BEB5A9;">
+            All 5 Screens Grid
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 pb-10">
+
+    <!-- MODE 1: INTERACTIVE PROTOTYPE -->
+    <section id="interactiveView" class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 pt-2">
+
+      <!-- Left Screen Navigation & Quick Guide -->
+      <aside class="w-full max-w-md lg:w-72 flex flex-col gap-3 order-2 lg:order-1">
+        <div class="rounded-2xl p-4 shadow-md" style="background-color: #E1D4C2; border: 1px solid #A78D78;">
+          <h2 class="text-xs font-bold uppercase tracking-wider mb-2.5" style="color: #6E473B;">Jump to Screen</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-1.5" id="screenNavList">
+            <button type="button" data-screen="inbox" class="screen-nav-btn text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition">
+              <span>1. Inbox &amp; Filters</span>
+              <span class="text-[10px] opacity-75">Home</span>
+            </button>
+            <button type="button" data-screen="thread" class="screen-nav-btn text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition">
+              <span>2. Chat Thread</span>
+              <span class="text-[10px] opacity-75">SMS</span>
+            </button>
+            <button type="button" data-screen="compose" class="screen-nav-btn text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition">
+              <span>3. New Message</span>
+              <span class="text-[10px] opacity-75">Compose</span>
+            </button>
+            <button type="button" data-screen="contact" class="screen-nav-btn text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition">
+              <span>4. Contact &amp; Media</span>
+              <span class="text-[10px] opacity-75">Details</span>
+            </button>
+            <button type="button" data-screen="settings" class="screen-nav-btn text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition">
+              <span>5. App Settings</span>
+              <span class="text-[10px] opacity-75">Prefs</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="rounded-2xl p-4 shadow-md" style="background-color: #EFE6D8; border: 1px solid #BEB5A9;">
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-2" style="color: #291C0E;">Palette Mapping</h3>
+          <ul class="space-y-2 text-xs" style="color: #6E473B;">
+            <li class="flex items-start gap-2">
+              <span class="w-3 h-3 rounded-full mt-0.5 shrink-0" style="background-color: #E1D4C2; border: 1px solid #A78D78;"></span>
+              <span><strong style="color:#291C0E;">#E1D4C2</strong> — Main canvas, compose sheet &amp; light text</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-3 h-3 rounded-full mt-0.5 shrink-0" style="background-color: #BEB5A9;"></span>
+              <span><strong style="color:#291C0E;">#BEB5A9</strong> — Incoming SMS bubbles, search bar &amp; cards</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-3 h-3 rounded-full mt-0.5 shrink-0" style="background-color: #A78D78;"></span>
+              <span><strong style="color:#291C0E;">#A78D78</strong> — Timestamps, avatars, borders &amp; muted labels</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-3 h-3 rounded-full mt-0.5 shrink-0" style="background-color: #6E473B;"></span>
+              <span><strong style="color:#291C0E;">#6E473B</strong> — Sent SMS bubbles, unread badges &amp; FAB</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-3 h-3 rounded-full mt-0.5 shrink-0" style="background-color: #291C0E;"></span>
+              <span><strong style="color:#291C0E;">#291C0E</strong> — Typography, top bars &amp; active toggles</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Center Interactive Mobile Frame -->
+      <div class="order-1 lg:order-2 flex justify-center w-full max-w-[390px]">
+        <div class="phone-frame" id="activePhoneFrame">
+          <!-- Status Bar + Dynamic Island -->
+          <div class="px-6 pt-1 pb-2 flex items-center justify-between text-[11px] font-semibold shrink-0" style="color: #291C0E;">
+            <span>9:41</span>
+            <div class="dynamic-island">
+              <span class="w-2.5 h-2.5 rounded-full" style="background-color: #6E473B;"></span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M2 20h2V10H2v10zm4 0h2V7H6v13zm4 0h2V4h-2v16zm4 0h2V13h-2v7zm4 0h2V16h-2v4z"/></svg>
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 7H7a3 3 0 00-3 3v4a3 3 0 003 3h10a3 3 0 003-3v-4a3 3 0 00-3-3zm4 4v2h1v-2h-1z"/></svg>
+            </div>
+          </div>
+
+          <!-- Dynamic Screen Content -->
+          <div id="phoneScreenRoot" class="flex-1 flex flex-col overflow-hidden relative"></div>
+
+          <!-- Home Indicator -->
+          <div class="py-2 flex justify-center shrink-0" style="background-color: inherit;">
+            <div class="w-28 h-1 rounded-full" style="background-color: rgba(41, 28, 14, 0.35);"></div>
+          </div>
+
+          <!-- In-Phone Toast -->
+          <div id="phoneToast" class="hidden absolute bottom-14 left-4 right-4 px-3.5 py-2.5 rounded-xl text-xs font-medium shadow-lg toast-enter z-30"
+               style="background-color: #291C0E; color: #E1D4C2;">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- MODE 2: ALL 5 SCREENS GALLERY GRID -->
+    <section id="galleryView" class="hidden pt-2">
+      <div class="flex flex-wrap justify-center gap-7" id="galleryGrid">
+        <!-- Populated by JS so every screen stays visually faithful and clickable -->
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // --- Palette & App Data ---
+    const state = {
+      mode: 'interactive', // 'interactive' | 'gallery'
+      activeScreen: 'inbox', // 'inbox' | 'thread' | 'compose' | 'contact' | 'settings'
+      activeTab: 'all', // 'all' | 'unread' | 'pinned' | 'otp'
+      searchQuery: '',
+      selectedId: 'c1',
+      composeTo: '',
+      composeText: '',
+      composeSim: 'SIM 1',
+      settings: {
+        deliveryReports: true,
+        smartOtpClean: true,
+        rcsFallback: true,
+        soundTone: 'Warm Woodblock',
+        bubbleRadius: 'Rounded (20px)'
+      },
+      conversations: [
+        {
+          id: 'c1',
+          name: 'Ananya Rao',
+          phone: '+91 98450 21490',
+          initials: 'AR',
+          avatarBg: '#6E473B',
+          avatarText: '#E1D4C2',
+          category: 'personal',
+          pinned: true,
+          unread: 2,
+          muted: false,
+          lastTime: '9:38 PM',
+          carrier: 'SMS · SIM 1',
+          messages: [
+            { id: 'm1', sender: 'them', text: 'Hey! Did you finalize the UI palette for the presentation?', time: '9:31 PM', date: 'Today' },
+            { id: 'm2', sender: 'me', text: 'Yes! Going with the warm espresso & cream tones—looks super clean.', time: '9:34 PM', status: 'Delivered' },
+            { id: 'm3', sender: 'them', text: 'Love that contrast. Can you send over the mockup screens before 10?', time: '9:37 PM' },
+            { id: 'm4', sender: 'them', text: 'Also let me know if we are meeting at the studio tomorrow morning.', time: '9:38 PM' }
+          ]
+        },
+        {
+          id: 'c2',
+          name: 'HDFC Bank Alerts',
+          phone: 'VM-HDFCBK',
+          initials: 'HB',
+          avatarBg: '#291C0E',
+          avatarText: '#E1D4C2',
+          category: 'otp',
+          pinned: false,
+          unread: 1,
+          muted: false,
+          lastTime: '8:15 PM',
+          carrier: 'Service SMS',
+          messages: [
+            { id: 'm21', sender: 'them', text: '482910 is your One Time Password (OTP) for card ending 4419. Valid for 5 mins. Do not share.', time: '8:15 PM', date: 'Today', otp: '482910' }
+          ]
+        },
+        {
+          id: 'c3',
+          name: 'Karthik Menon',
+          phone: '+91 99001 77321',
+          initials: 'KM',
+          avatarBg: '#A78D78',
+          avatarText: '#291C0E',
+          category: 'personal',
+          pinned: true,
+          unread: 0,
+          muted: false,
+          lastTime: '6:42 PM',
+          carrier: 'SMS · SIM 1',
+          messages: [
+            { id: 'm31', sender: 'me', text: 'Just pushed the latest build to GitHub.', time: '6:30 PM', date: 'Today', status: 'Read' },
+            { id: 'm32', sender: 'them', text: 'Awesome, pulling it now. Will test the SMS webhook flow and update you.', time: '6:42 PM' }
+          ]
+        },
+        {
+          id: 'c4',
+          name: 'BlueDart Express',
+          phone: 'AX-BLUDRT',
+          initials: 'BD',
+          avatarBg: '#6E473B',
+          avatarText: '#E1D4C2',
+          category: 'otp',
+          pinned: false,
+          unread: 0,
+          muted: true,
+          lastTime: '3:10 PM',
+          carrier: 'Service SMS',
+          messages: [
+            { id: 'm41', sender: 'them', text: 'Your shipment AWB 774920184 is out for delivery in Bengaluru. Share PIN 3914 at handover.', time: '3:10 PM', date: 'Today', otp: '3914' }
+          ]
+        },
+        {
+          id: 'c5',
+          name: 'Priya Nair',
+          phone: '+91 97412 88014',
+          initials: 'PN',
+          avatarBg: '#BEB5A9',
+          avatarText: '#291C0E',
+          category: 'personal',
+          pinned: false,
+          unread: 0,
+          muted: false,
+          lastTime: 'Yesterday',
+          carrier: 'SMS · SIM 2',
+          messages: [
+            { id: 'm51', sender: 'them', text: 'Thanks for sharing the notes from today’s lecture!', time: 'Yesterday', date: 'Yesterday' },
+            { id: 'm52', sender: 'me', text: 'Anytime! Let me know if you need the PDF too.', time: 'Yesterday', status: 'Delivered' }
+          ]
+        },
+        {
+          id: 'c6',
+          name: 'Arjun Dev',
+          phone: '+91 96115 34902',
+          initials: 'AD',
+          avatarBg: '#291C0E',
+          avatarText: '#E1D4C2',
+          category: 'personal',
+          pinned: false,
+          unread: 0,
+          muted: false,
+          lastTime: 'Mon',
+          carrier: 'SMS · SIM 1',
+          messages: [
+            { id: 'm61', sender: 'them', text: 'Coffee at Third Wave around 5?', time: 'Mon', date: 'Monday' },
+            { id: 'm62', sender: 'me', text: 'Count me in.', time: 'Mon', status: 'Delivered' }
+          ]
+        }
+      ],
+      quickContacts: [
+        { name: 'Ananya Rao', phone: '+91 98450 21490', initials: 'AR' },
+        { name: 'Karthik Menon', phone: '+91 99001 77321', initials: 'KM' },
+        { name: 'Priya Nair', phone: '+91 97412 88014', initials: 'PN' },
+        { name: 'Arjun Dev', phone: '+91 96115 34902', initials: 'AD' }
+      ]
+    };
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('phoneToast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        el.classList.add('hidden');
+      }, 2200);
+    }
+
+    function copyText(text, label) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+      showToast(label || `Copied ${text}`);
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    function getSelectedConversation() {
+      return state.conversations.find(c => c.id === state.selectedId) || state.conversations[0];
+    }
+
+    function getFilteredConversations() {
+      return state.conversations.filter(c => {
+        if (state.activeTab === 'unread' && c.unread === 0) return false;
+        if (state.activeTab === 'pinned' && !c.pinned) return false;
+        if (state.activeTab === 'otp' && c.category !== 'otp') return false;
+        if (state.searchQuery.trim()) {
+          const q = state.searchQuery.toLowerCase();
+          const lastMsg = c.messages[c.messages.length - 1]?.text.toLowerCase() || '';
+          return c.name.toLowerCase().includes(q) || c.phone.toLowerCase().includes(q) || lastMsg.includes(q);
+        }
+        return true;
+      });
+    }
+
+    function totalUnreadCount() {
+      return state.conversations.reduce((sum, c) => sum + c.unread, 0);
+    }
+
+    // --- Screen Renderers (Pure HTML strings parameterized for both interactive & gallery modes) ---
+
+    function renderInboxHTML(isMini = false) {
+      const filtered = getFilteredConversations();
+      const unreadTotal = totalUnreadCount();
+      const tabs = [
+        { id: 'all', label: 'All' },
+        { id: 'unread', label: `Unread${unreadTotal ? ` (${unreadTotal})` : ''}` },
+        { id: 'pinned', label: 'Pinned' },
+        { id: 'otp', label: 'OTP & Alerts' }
+      ];
+
+      return `
+        <div class="flex flex-col h-full" style="background-color: #E1D4C2;">
+          <!-- Header -->
+          <div class="px-5 pt-2 pb-3 flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight" style="color: #291C0E;">Messages</h2>
+              <p class="text-[11px] font-medium" style="color: #6E473B;">
+                ${unreadTotal > 0 ? `${unreadTotal} unread messages` : 'All caught up'}
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" data-action="go-settings" title="Settings"
+                      class="w-9 h-9 rounded-full flex items-center justify-center transition hover:opacity-85"
+                      style="background-color: #BEB5A9; color: #291C0E;">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </button>
+              <button type="button" data-action="go-compose" title="New SMS"
+                      class="w-9 h-9 rounded-full flex items-center justify-center transition hover:opacity-90 shadow-sm"
+                      style="background-color: #6E473B; color: #E1D4C2;">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="px-5 pb-3">
+            <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl" style="background-color: #BEB5A9;">
+              <svg class="w-4 h-4 shrink-0" style="color: #6E473B;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input type="text" ${isMini ? 'readonly' : 'id="inboxSearchInput"'}
+                     value="${state.searchQuery.replace(/"/g, '&quot;')}"
+                     placeholder="Search messages, contacts, OTPs..."
+                     class="w-full bg-transparent text-xs outline-none placeholder-[#6E473B]/75"
+                     style="color: #291C0E;" />
+              ${state.searchQuery && !isMini ? `
+                <button type="button" data-action="clear-search" class="text-[11px] font-semibold px-1.5" style="color: #291C0E;">✕</button>
+              ` : ''}
+            </div>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="px-5 pb-3 flex items-center gap-1.5 overflow-x-auto phone-scroll shrink-0">
+            ${tabs.map(t => {
+              const active = state.activeTab === t.id;
+              return `
+                <button type="button" data-action="filter-tab" data-tab="${t.id}"
+                        class="px-3 py-1.5 rounded-full text-[11px] font-semibold whitespace-nowrap transition"
+                        style="background-color: ${active ? '#291C0E' : '#BEB5A9'}; color: ${active ? '#E1D4C2' : '#291C0E'};">
+                  ${t.label}
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Conversation List -->
+          <div class="flex-1 overflow-y-auto phone-scroll px-3 pb-16 space-y-1">
+            ${filtered.length === 0 ? `
+              <div class="text-center py-12 px-4">
+                <p class="text-sm font-semibold" style="color: #291C0E;">No matching threads</p>
+                <p class="text-xs mt-1" style="color: #6E473B;">Try another filter or start a new SMS.</p>
+              </div>
+            ` : filtered.map(c => {
+              const last = c.messages[c.messages.length - 1];
+              const isSelected = c.id === state.selectedId;
+              return `
+                <button type="button" data-action="open-thread" data-id="${c.id}"
+                        class="w-full text-left p-2.5 rounded-2xl flex items-center gap-3 transition"
+                        style="background-color: ${isSelected && !isMini ? 'rgba(190, 181, 169, 0.55)' : 'transparent'};">
+                  <div class="relative shrink-0">
+                    <div class="w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold shadow-sm"
+                         style="background-color: ${c.avatarBg}; color: ${c.avatarText};">
+                      ${c.initials}
+                    </div>
+                    ${c.pinned ? `
+                      <span class="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full flex items-center justify-center border border-[#E1D4C2]"
+                            style="background-color: #A78D78; color: #291C0E;" title="Pinned">
+                        <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      </span>
+                    ` : ''}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="text-xs font-bold truncate" style="color: #291C0E;">${c.name}</span>
+                      <span class="text-[10px] font-medium shrink-0" style="color: ${c.unread > 0 ? '#6E473B' : '#A78D78'};">${c.lastTime}</span>
+                    </div>
+                    <div class="flex items-center justify-between gap-2 mt-0.5">
+                      <p class="text-[11px] truncate ${c.unread > 0 ? 'font-semibold' : ''}"
+                         style="color: ${c.unread > 0 ? '#291C0E' : '#6E473B'};">
+                        ${last.sender === 'me' ? 'You: ' : ''}${last.text}
+                      </p>
+                      ${c.unread > 0 ? `
+                        <span class="px-1.5 py-0.5 rounded-full text-[10px] font-bold shrink-0"
+                              style="background-color: #6E473B; color: #E1D4C2;">
+                          ${c.unread}
+                        </span>
+                      ` : ''}
+                    </div>
+                  </div>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Bottom Floating Action Bar -->
+          <div class="absolute bottom-3 left-4 right-4 px-4 py-2 rounded-2xl flex items-center justify-between shadow-md"
+               style="background-color: #291C0E; color: #E1D4C2;">
+            <button type="button" data-action="go-inbox" class="flex items-center gap-1.5 text-[11px] font-semibold">
+              <span class="w-2 h-2 rounded-full" style="background-color: #A78D78;"></span>
+              Inbox
+            </button>
+            <button type="button" data-action="go-compose"
+                    class="px-3.5 py-1.5 rounded-xl text-[11px] font-semibold flex items-center gap-1.5 transition hover:opacity-90"
+                    style="background-color: #6E473B; color: #E1D4C2;">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              Compose
+            </button>
+            <button type="button" data-action="go-settings" class="text-[11px] font-medium" style="color: #BEB5A9;">
+              Settings
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderThreadHTML(isMini = false) {
+      const c = getSelectedConversation();
+      return `
+        <div class="flex flex-col h-full" style="background-color: #E1D4C2;">
+          <!-- Thread Top Bar -->
+          <div class="px-4 py-2.5 flex items-center justify-between border-b shrink-0"
+               style="background-color: #E1D4C2; border-color: #BEB5A9;">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <button type="button" data-action="go-inbox"
+                      class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition hover:opacity-80"
+                      style="background-color: #BEB5A9; color: #291C0E;">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button type="button" data-action="go-contact" class="flex items-center gap-2.5 min-w-0 text-left">
+                <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                     style="background-color: ${c.avatarBg}; color: ${c.avatarText};">
+                  ${c.initials}
+                </div>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold truncate" style="color: #291C0E;">${c.name}</p>
+                  <p class="text-[10px] truncate" style="color: #6E473B;">${c.carrier}</p>
+                </div>
+              </button>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button type="button" data-action="call-contact" title="Call"
+                      class="w-8 h-8 rounded-full flex items-center justify-center transition hover:opacity-80"
+                      style="background-color: #BEB5A9; color: #291C0E;">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </button>
+              <button type="button" data-action="go-contact" title="Details"
+                      class="w-8 h-8 rounded-full flex items-center justify-center transition hover:opacity-80"
+                      style="background-color: #BEB5A9; color: #291C0E;">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Messages Stream -->
+          <div class="flex-1 overflow-y-auto phone-scroll px-4 py-3 space-y-3" id="${isMini ? '' : 'threadMessagesArea'}">
+            <div class="text-center">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold"
+                    style="background-color: #BEB5A9; color: #291C0E;">
+                Today
+              </span>
+            </div>
+
+            ${c.messages.map(m => {
+              const isMe = m.sender === 'me';
+              return `
+                <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
+                  <div class="max-w-[82%] px-3.5 py-2.5 text-xs leading-relaxed shadow-sm ${isMe ? 'bubble-sent' : 'bubble-received'}">
+                    <p>${m.text}</p>
+                    ${m.otp ? `
+                      <button type="button" data-action="copy-otp" data-otp="${m.otp}"
+                              class="mt-2 w-full py-1.5 px-2.5 rounded-xl text-[11px] font-semibold flex items-center justify-center gap-1.5 transition"
+                              style="background-color: #291C0E; color: #E1D4C2;">
+                        Copy OTP: ${m.otp}
+                      </button>
+                    ` : ''}
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1 px-1 text-[10px]" style="color: #6E473B;">
+                    <span>${m.time}</span>
+                    ${isMe && m.status ? `<span>· ${m.status}</span>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Quick Reply Chips -->
+          <div class="px-3 pb-2 flex items-center gap-1.5 overflow-x-auto phone-scroll shrink-0">
+            ${['On my way!', 'Sounds good 👍', 'Call you in 5 mins'].map(q => `
+              <button type="button" data-action="quick-reply" data-text="${q}"
+                      class="px-2.5 py-1 rounded-full text-[10px] font-semibold whitespace-nowrap border transition hover:opacity-85"
+                      style="background-color: #EFE6D8; border-color: #A78D78; color: #291C0E;">
+                ${q}
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Composer Bar -->
+          <div class="p-3 border-t flex items-center gap-2 shrink-0"
+               style="background-color: #E1D4C2; border-color: #BEB5A9;">
+            <button type="button" data-action="attach-toast"
+                    class="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                    style="background-color: #BEB5A9; color: #291C0E;" title="Attach">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+            <input type="text" ${isMini ? 'readonly' : 'id="threadReplyInput"'}
+                   placeholder="Text message (SMS)..."
+                   class="flex-1 px-3.5 py-2 rounded-full text-xs outline-none placeholder-[#6E473B]/75"
+                   style="background-color: #BEB5A9; color: #291C0E;" />
+            <button type="button" data-action="send-reply"
+                    class="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition hover:opacity-90"
+                    style="background-color: #6E473B; color: #E1D4C2;" title="Send SMS">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderComposeHTML(isMini = false) {
+      return `
+        <div class="flex flex-col h-full" style="background-color: #E1D4C2;">
+          <!-- Header -->
+          <div class="px-4 py-2.5 flex items-center justify-between border-b shrink-0"
+               style="border-color: #BEB5A9;">
+            <button type="button" data-action="go-inbox"
+                    class="px-3 py-1 rounded-full text-xs font-semibold"
+                    style="background-color: #BEB5A9; color: #291C0E;">
+              Cancel
+            </button>
+            <h2 class="text-sm font-bold" style="color: #291C0E;">New Message</h2>
+            <button type="button" data-action="toggle-sim"
+                    class="px-2.5 py-1 rounded-full text-[10px] font-bold"
+                    style="background-color: #291C0E; color: #E1D4C2;">
+              ${state.composeSim}
+            </button>
+          </div>
+
+          <!-- Recipient Input -->
+          <div class="px-4 py-3 border-b flex items-center gap-2" style="border-color: #BEB5A9;">
+            <span class="text-xs font-semibold" style="color: #6E473B;">To:</span>
+            <input type="text" ${isMini ? 'readonly' : 'id="composeToInput"'}
+                   value="${state.composeTo.replace(/"/g, '&quot;')}"
+                   placeholder="Name or phone number..."
+                   class="flex-1 bg-transparent text-xs font-medium outline-none placeholder-[#A78D78]"
+                   style="color: #291C0E;" />
+          </div>
+
+          <!-- Suggested Contacts -->
+          <div class="flex-1 overflow-y-auto phone-scroll p-4 space-y-4">
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-wider mb-2" style="color: #6E473B;">Suggested Contacts</p>
+              <div class="space-y-1.5">
+                ${state.quickContacts.map(qc => `
+                  <button type="button" data-action="pick-recipient" data-name="${qc.name}"
+                          class="w-full p-2.5 rounded-2xl flex items-center gap-3 text-left transition hover:opacity-90"
+                          style="background-color: ${state.composeTo === qc.name ? '#BEB5A9' : '#EFE6D8'};">
+                    <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
+                         style="background-color: #6E473B; color: #E1D4C2;">
+                      ${qc.initials}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-bold truncate" style="color: #291C0E;">${qc.name}</p>
+                      <p class="text-[10px]" style="color: #6E473B;">${qc.phone}</p>
+                    </div>
+                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                          style="background-color: #A78D78; color: #291C0E;">
+                      Select
+                    </span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Scheduled / Template Card -->
+            <div class="p-3.5 rounded-2xl" style="background-color: #BEB5A9;">
+              <p class="text-[11px] font-bold" style="color: #291C0E;">Quick SMS Templates</p>
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                ${['Running 10 mins late', 'Call me when free', 'Shared the location'].map(tpl => `
+                  <button type="button" data-action="fill-template" data-tpl="${tpl}"
+                          class="px-2.5 py-1 rounded-full text-[10px] font-semibold"
+                          style="background-color: #E1D4C2; color: #291C0E;">
+                    ${tpl}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Message Box -->
+          <div class="p-3 border-t flex items-end gap-2 shrink-0" style="border-color: #BEB5A9;">
+            <textarea rows="2" ${isMini ? 'readonly' : 'id="composeBodyInput"'}
+                      placeholder="Write your SMS..."
+                      class="flex-1 px-3.5 py-2 rounded-2xl text-xs outline-none resize-none placeholder-[#6E473B]/75"
+                      style="background-color: #BEB5A9; color: #291C0E;">${state.composeText}</textarea>
+            <button type="button" data-action="send-new-sms"
+                    class="px-4 py-2.5 rounded-2xl text-xs font-bold shrink-0 transition hover:opacity-90"
+                    style="background-color: #291C0E; color: #E1D4C2;">
+              Send
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderContactHTML(isMini = false) {
+      const c = getSelectedConversation();
+      return `
+        <div class="flex flex-col h-full" style="background-color: #E1D4C2;">
+          <!-- Top Bar -->
+          <div class="px-4 py-2.5 flex items-center justify-between shrink-0">
+            <button type="button" data-action="open-thread" data-id="${c.id}"
+                    class="w-8 h-8 rounded-full flex items-center justify-center"
+                    style="background-color: #BEB5A9; color: #291C0E;">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <span class="text-xs font-bold" style="color: #291C0E;">Contact Info</span>
+            <span class="w-8"></span>
+          </div>
+
+          <div class="flex-1 overflow-y-auto phone-scroll px-5 pb-6 space-y-4">
+            <!-- Profile Hero -->
+            <div class="flex flex-col items-center text-center pt-2">
+              <div class="w-20 h-20 rounded-full flex items-center justify-center text-xl font-bold shadow-md"
+                   style="background-color: ${c.avatarBg}; color: ${c.avatarText};">
+                ${c.initials}
+              </div>
+              <h2 class="text-base font-bold mt-3" style="color: #291C0E;">${c.name}</h2>
+              <p class="text-xs font-medium mt-0.5" style="color: #6E473B;">${c.phone}</p>
+            </div>
+
+            <!-- Action Row -->
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-action="call-contact"
+                      class="py-2.5 rounded-2xl flex flex-col items-center gap-1 text-[11px] font-semibold"
+                      style="background-color: #BEB5A9; color: #291C0E;">
+                <span>Call</span>
+              </button>
+              <button type="button" data-action="toggle-pin"
+                      class="py-2.5 rounded-2xl flex flex-col items-center gap-1 text-[11px] font-semibold"
+                      style="background-color: ${c.pinned ? '#6E473B' : '#BEB5A9'}; color: ${c.pinned ? '#E1D4C2' : '#291C0E'};">
+                <span>${c.pinned ? 'Pinned' : 'Pin'}</span>
+              </button>
+              <button type="button" data-action="toggle-mute"
+                      class="py-2.5 rounded-2xl flex flex-col items-center gap-1 text-[11px] font-semibold"
+                      style="background-color: ${c.muted ? '#291C0E' : '#BEB5A9'}; color: ${c.muted ? '#E1D4C2' : '#291C0E'};">
+                <span>${c.muted ? 'Muted' : 'Mute'}</span>
+              </button>
+            </div>
+
+            <!-- Shared Media Card -->
+            <div class="p-3.5 rounded-2xl" style="background-color: #EFE6D8; border: 1px solid #BEB5A9;">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="text-xs font-bold" style="color: #291C0E;">Shared Links &amp; Media</span>
+                <span class="text-[10px] font-semibold" style="color: #6E473B;">3 items</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div class="h-16 rounded-xl flex items-center justify-center text-[10px] font-semibold"
+                     style="background-color: #6E473B; color: #E1D4C2;">Palette.png</div>
+                <div class="h-16 rounded-xl flex items-center justify-center text-[10px] font-semibold"
+                     style="background-color: #A78D78; color: #291C0E;">Mockup.fig</div>
+                <div class="h-16 rounded-xl flex items-center justify-center text-[10px] font-semibold"
+                     style="background-color: #BEB5A9; color: #291C0E;">Spec.pdf</div>
+              </div>
+            </div>
+
+            <!-- Thread Options -->
+            <div class="rounded-2xl overflow-hidden divide-y" style="background-color: #BEB5A9; border-color: #A78D78;">
+              <div class="px-4 py-3 flex items-center justify-between text-xs font-medium" style="color: #291C0E;">
+                <span>Default Route</span>
+                <span class="font-bold" style="color: #6E473B;">${c.carrier}</span>
+              </div>
+              <div class="px-4 py-3 flex items-center justify-between text-xs font-medium" style="color: #291C0E;">
+                <span>Block &amp; Report Spam</span>
+                <button type="button" data-action="block-toast" class="text-[11px] font-bold" style="color: #6E473B;">Block</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSettingsHTML(isMini = false) {
+      const s = state.settings;
+      const toggleRow = (key, title, desc, val) => `
+        <div class="px-4 py-3 flex items-center justify-between gap-3">
+          <div>
+            <p class="text-xs font-semibold" style="color: #291C0E;">${title}</p>
+            <p class="text-[10px]" style="color: #6E473B;">${desc}</p>
+          </div>
+          <button type="button" data-action="toggle-setting" data-key="${key}"
+                  class="w-10 h-6 rounded-full p-0.5 transition flex items-center ${val ? 'justify-end' : 'justify-start'}"
+                  style="background-color: ${val ? '#6E473B' : '#A78D78'};">
+            <span class="w-5 h-5 rounded-full shadow-sm" style="background-color: #E1D4C2;"></span>
+          </button>
+        </div>
+      `;
+
+      return `
+        <div class="flex flex-col h-full" style="background-color: #E1D4C2;">
+          <!-- Header -->
+          <div class="px-4 py-2.5 flex items-center justify-between border-b shrink-0" style="border-color: #BEB5A9;">
+            <button type="button" data-action="go-inbox"
+                    class="w-8 h-8 rounded-full flex items-center justify-center"
+                    style="background-color: #BEB5A9; color: #291C0E;">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <h2 class="text-sm font-bold" style="color: #291C0E;">SMS Settings</h2>
+            <span class="w-8"></span>
+          </div>
+
+          <div class="flex-1 overflow-y-auto phone-scroll p-4 space-y-4">
+            <!-- Theme Card -->
+            <div class="p-3.5 rounded-2xl" style="background-color: #291C0E; color: #E1D4C2;">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold">Active Theme: Warm Earth</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full" style="background-color: #6E473B;">5-Tone</span>
+              </div>
+              <div class="flex items-center gap-1.5 mt-3">
+                <span class="h-5 flex-1 rounded-lg border border-[#E1D4C2]/30" style="background-color: #291C0E;"></span>
+                <span class="h-5 flex-1 rounded-lg" style="background-color: #6E473B;"></span>
+                <span class="h-5 flex-1 rounded-lg" style="background-color: #A78D78;"></span>
+                <span class="h-5 flex-1 rounded-lg" style="background-color: #BEB5A9;"></span>
+                <span class="h-5 flex-1 rounded-lg" style="background-color: #E1D4C2;"></span>
+              </div>
+            </div>
+
+            <!-- Messaging Preferences -->
+            <div class="rounded-2xl divide-y" style="background-color: #EFE6D8; border: 1px solid #BEB5A9;">
+              ${toggleRow('deliveryReports', 'SMS Delivery Reports', 'Show Delivered / Read status under bubbles', s.deliveryReports)}
+              ${toggleRow('smartOtpClean', 'Auto-Organize OTPs', 'Group bank & courier codes in OTP tab', s.smartOtpClean)}
+              ${toggleRow('rcsFallback', 'RCS to SMS Fallback', 'Automatically switch to SMS offline', s.rcsFallback)}
+            </div>
+
+            <!-- Sound & Style -->
+            <div class="rounded-2xl p-4 space-y-2.5" style="background-color: #BEB5A9;">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold" style="color: #291C0E;">Notification Tone</span>
+                <span class="font-bold" style="color: #6E473B;">${s.soundTone}</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold" style="color: #291C0E;">Bubble Geometry</span>
+                <span class="font-bold" style="color: #6E473B;">${s.bubbleRadius}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderActiveScreen() {
+      const root = document.getElementById('phoneScreenRoot');
+      if (!root) return;
+
+      if (state.activeScreen === 'inbox') root.innerHTML = renderInboxHTML(false);
+      else if (state.activeScreen === 'thread') root.innerHTML = renderThreadHTML(false);
+      else if (state.activeScreen === 'compose') root.innerHTML = renderComposeHTML(false);
+      else if (state.activeScreen === 'contact') root.innerHTML = renderContactHTML(false);
+      else if (state.activeScreen === 'settings') root.innerHTML = renderSettingsHTML(false);
+
+      updateSidebarNav();
+      bindPhoneInputs();
+    }
+
+    function updateSidebarNav() {
+      document.querySelectorAll('.screen-nav-btn').forEach(btn => {
+        const active = btn.dataset.screen === state.activeScreen;
+        btn.style.backgroundColor = active ? '#291C0E' : '#EFE6D8';
+        btn.style.color = active ? '#E1D4C2' : '#291C0E';
+      });
+    }
+
+    function bindPhoneInputs() {
+      const searchInput = document.getElementById('inboxSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          state.searchQuery = e.target.value;
+          const pos = e.target.selectionStart;
+          renderActiveScreen();
+          const refreshed = document.getElementById('inboxSearchInput');
+          if (refreshed) {
+            refreshed.focus();
+            refreshed.setSelectionRange(pos, pos);
+          }
+        });
+      }
+
+      const replyInput = document.getElementById('threadReplyInput');
+      if (replyInput) {
+        replyInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            sendThreadReply();
+          }
+        });
+      }
+
+      const composeTo = document.getElementById('composeToInput');
+      if (composeTo) {
+        composeTo.addEventListener('input', (e) => {
+          state.composeTo = e.target.value;
+        });
+      }
+
+      const composeBody = document.getElementById('composeBodyInput');
+      if (composeBody) {
+        composeBody.addEventListener('input', (e) => {
+          state.composeText = e.target.value;
+        });
+      }
+    }
+
+    function sendThreadReply(overrideText) {
+      const input = document.getElementById('threadReplyInput');
+      const text = (overrideText !== undefined ? overrideText : (input ? input.value : '')).trim();
+      if (!text) return;
+      const c = getSelectedConversation();
+      c.messages.push({
+        id: 'm_' + Date.now(),
+        sender: 'me',
+        text,
+        time: 'Just now',
+        status: state.settings.deliveryReports ? 'Delivered' : ''
+      });
+      c.lastTime = 'Just now';
+      renderActiveScreen();
+      const area = document.getElementById('threadMessagesArea');
+      if (area) area.scrollTop = area.scrollHeight;
+    }
+
+    function sendNewSms() {
+      const to = state.composeTo.trim();
+      const text = state.composeText.trim();
+      if (!to || !text) {
+        showToast('Enter a recipient and message first');
+        return;
+      }
+      let existing = state.conversations.find(c => c.name.toLowerCase() === to.toLowerCase() || c.phone === to);
+      if (!existing) {
+        const initials = to.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'SM';
+        existing = {
+          id: 'c_' + Date.now(),
+          name: to,
+          phone: to.startsWith('+') ? to : '+91 98000 12345',
+          initials,
+          avatarBg: '#6E473B',
+          avatarText: '#E1D4C2',
+          category: 'personal',
+          pinned: false,
+          unread: 0,
+          muted: false,
+          lastTime: 'Just now',
+          carrier: `SMS · ${state.composeSim}`,
+          messages: []
+        };
+        state.conversations.unshift(existing);
+      }
+      existing.messages.push({
+        id: 'm_' + Date.now(),
+        sender: 'me',
+        text,
+        time: 'Just now',
+        status: state.settings.deliveryReports ? 'Delivered' : ''
+      });
+      existing.lastTime = 'Just now';
+      state.selectedId = existing.id;
+      state.composeTo = '';
+      state.composeText = '';
+      state.activeScreen = 'thread';
+      renderActiveScreen();
+      showToast(`SMS sent via ${state.composeSim}`);
+    }
+
+    function renderGalleryGrid() {
+      const screens = [
+        { key: 'inbox', title: '1. Inbox & Filters', html: renderInboxHTML(true) },
+        { key: 'thread', title: '2. Chat Thread', html: renderThreadHTML(true) },
+        { key: 'compose', title: '3. New Message', html: renderComposeHTML(true) },
+        { key: 'contact', title: '4. Contact & Media', html: renderContactHTML(true) },
+        { key: 'settings', title: '5. App Settings', html: renderSettingsHTML(true) }
+      ];
+
+      const grid = document.getElementById('galleryGrid');
+      grid.innerHTML = screens.map(s => `
+        <div class="flex flex-col items-center gap-2.5">
+          <div class="flex items-center justify-between w-full px-2">
+            <span class="text-xs font-bold" style="color: #291C0E;">${s.title}</span>
+            <button type="button" data-open-interactive="${s.key}"
+                    class="text-[11px] font-semibold px-2.5 py-1 rounded-full transition hover:opacity-85"
+                    style="background-color: #291C0E; color: #E1D4C2;">
+              Open Interactive
+            </button>
+          </div>
+          <div class="phone-frame-mini">
+            <div class="px-5 pt-1 pb-1.5 flex items-center justify-between text-[10px] font-semibold shrink-0" style="color: #291C0E;">
+              <span>9:41</span>
+              <div class="dynamic-island" style="width: 86px; height: 22px;">
+                <span class="w-2 h-2 rounded-full" style="background-color: #6E473B;"></span>
+              </div>
+              <span>5G</span>
+            </div>
+            <div class="flex-1 overflow-hidden relative">${s.html}</div>
+            <div class="py-1.5 flex justify-center shrink-0">
+              <div class="w-24 h-1 rounded-full" style="background-color: rgba(41, 28, 14, 0.35);"></div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- Event Delegation ---
+    document.addEventListener('click', (e) => {
+      const swatch = e.target.closest('.swatch-btn');
+      if (swatch) {
+        copyText(swatch.dataset.hex, `Copied ${swatch.dataset.hex} (${swatch.dataset.role})`);
+        return;
+      }
+
+      const openInteractive = e.target.closest('[data-open-interactive]');
+      if (openInteractive) {
+        state.activeScreen = openInteractive.dataset.openInteractive;
+        setMode('interactive');
+        return;
+      }
+
+      const navBtn = e.target.closest('.screen-nav-btn');
+      if (navBtn) {
+        state.activeScreen = navBtn.dataset.screen;
+        renderActiveScreen();
+        return;
+      }
+
+      const actionEl = e.target.closest('[data-action]');
+      if (!actionEl) return;
+      const action = actionEl.dataset.action;
+
+      if (action === 'go-inbox') {
+        state.activeScreen = 'inbox';
+        renderActiveScreen();
+      } else if (action === 'go-compose') {
+        state.activeScreen = 'compose';
+        renderActiveScreen();
+      } else if (action === 'go-settings') {
+        state.activeScreen = 'settings';
+        renderActiveScreen();
+      } else if (action === 'go-contact') {
+        state.activeScreen = 'contact';
+        renderActiveScreen();
+      } else if (action === 'filter-tab') {
+        state.activeTab = actionEl.dataset.tab;
+        renderActiveScreen();
+      } else if (action === 'clear-search') {
+        state.searchQuery = '';
+        renderActiveScreen();
+      } else if (action === 'open-thread') {
+        state.selectedId = actionEl.dataset.id;
+        const conv = getSelectedConversation();
+        conv.unread = 0;
+        state.activeScreen = 'thread';
+        renderActiveScreen();
+      } else if (action === 'send-reply') {
+        sendThreadReply();
+      } else if (action === 'quick-reply') {
+        sendThreadReply(actionEl.dataset.text);
+      } else if (action === 'copy-otp') {
+        copyText(actionEl.dataset.otp, `OTP ${actionEl.dataset.otp} copied`);
+      } else if (action === 'call-contact') {
+        const c = getSelectedConversation();
+        showToast(`Dialing ${c.name} (${c.phone})...`);
+      } else if (action === 'attach-toast') {
+        showToast('Attachment picker: Photo, Contact, Location');
+      } else if (action === 'toggle-sim') {
+        state.composeSim = state.composeSim === 'SIM 1' ? 'SIM 2' : 'SIM 1';
+        renderActiveScreen();
+      } else if (action === 'pick-recipient') {
+        state.composeTo = actionEl.dataset.name;
+        renderActiveScreen();
+      } else if (action === 'fill-template') {
+        state.composeText = actionEl.dataset.tpl;
+        renderActiveScreen();
+      } else if (action === 'send-new-sms') {
+        sendNewSms();
+      } else if (action === 'toggle-pin') {
+        const c = getSelectedConversation();
+        c.pinned = !c.pinned;
+        renderActiveScreen();
+        showToast(c.pinned ? 'Conversation pinned' : 'Conversation unpinned');
+      } else if (action === 'toggle-mute') {
+        const c = getSelectedConversation();
+        c.muted = !c.muted;
+        renderActiveScreen();
+        showToast(c.muted ? 'Notifications muted' : 'Notifications unmuted');
+      } else if (action === 'block-toast') {
+        showToast('Contact blocked & moved to spam');
+      } else if (action === 'toggle-setting') {
+        const key = actionEl.dataset.key;
+        state.settings[key] = !state.settings[key];
+        renderActiveScreen();
+      }
+    });
+
+    function setMode(mode) {
+      state.mode = mode;
+      const interactiveView = document.getElementById('interactiveView');
+      const galleryView = document.getElementById('galleryView');
+      const btnInt = document.getElementById('modeInteractiveBtn');
+      const btnGal = document.getElementById('modeGalleryBtn');
+
+      if (mode === 'interactive') {
+        interactiveView.classList.remove('hidden');
+        galleryView.classList.add('hidden');
+        btnInt.style.backgroundColor = '#E1D4C2';
+        btnInt.style.color = '#291C0E';
+        btnGal.style.backgroundColor = 'transparent';
+        btnGal.style.color = '#BEB5A9';
+        renderActiveScreen();
+      } else {
+        interactiveView.classList.add('hidden');
+        galleryView.classList.remove('hidden');
+        btnGal.style.backgroundColor = '#E1D4C2';
+        btnGal.style.color = '#291C0E';
+        btnInt.style.backgroundColor = 'transparent';
+        btnInt.style.color = '#BEB5A9';
+        renderGalleryGrid();
+      }
+    }
+
+    document.getElementById('modeInteractiveBtn').addEventListener('click', () => setMode('interactive'));
+    document.getElementById('modeGalleryBtn').addEventListener('click', () => setMode('gallery'));
+
+    // Initial render
+    setMode('interactive');
+  </script>
+</body>
+</html>
